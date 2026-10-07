@@ -1,12 +1,7 @@
-import os
-from dotenv import load_dotenv
+from src.gmail_client import get_gmail_service
 
-load_dotenv()
+service = get_gmail_service()
+profile = service.users().getProfile(userId="me").execute()
 
-print("Ollama model:", os.getenv("OLLAMA_MODEL"))
-
-import googleapiclient
-import pypdf
-import docx
-import ollama
-print("All libraries imported successfully")
+print("Connected as:", profile["emailAddress"])
+print("Total messages:", profile["messagesTotal"])
